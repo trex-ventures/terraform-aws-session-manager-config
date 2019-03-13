@@ -27,6 +27,11 @@ resource "aws_s3_bucket" "this" {
   }
 }
 
+resource "aws_s3_bucket_policy" "this" {
+  bucket = "${local.s3_bucket_name}"
+  policy = "${data.aws_iam_policy_document.s3_bucket.json}"
+}
+
 resource "aws_ssm_document" "this" {
   name            = "${var.session_manager_document_name}"
   document_type   = "Session"

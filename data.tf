@@ -2,6 +2,10 @@ data "aws_caller_identity" "current" {}
 
 data "aws_region" "current" {}
 
+data "aws_iam_role" "super_admin" {
+  name = "SuperAdmin"
+}
+
 data "aws_iam_policy_document" "session_manager" {
   statement = {
     sid    = "AllowConnectToSSMServer"
@@ -74,5 +78,37 @@ data "aws_iam_policy_document" "session_manager" {
     ]
 
     resources = ["${aws_s3_bucket.this.arn}"]
+  }
+}
+
+data "aws_iam_policy_document" "s3_bucket" {
+  statement = {
+    sid    = "DenyDeleteExceptFromSuperAdmin"
+    effect = "Deny"
+
+    principals = {
+      type        = "*"
+      identifiers = ["*"]
+    }
+
+    actions = [
+      "s3:DeleteBucket",
+      "s3:DeleteObject",
+      "s3:DeleteObjectVersion",
+    ]
+
+    resources = [
+      "arn:aws:s3:::${local.s3_bucket_name}/*",
+      "arn:aws:s3:::${local.s3_bucket_name}",
+    ]
+
+    condition = {
+      test     = "StringNotLike"
+      variable = "aws:userId"
+
+      values = [
+        "${data.aws_iam_role.super_admin.id}:*", #SuperAdminRoleId
+      ]
+    }
   }
 }
