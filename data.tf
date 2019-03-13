@@ -66,6 +66,11 @@ data "aws_iam_policy_document" "session_manager" {
 
     actions = [
       "s3:PutObject",
+      "s3:GetEncryptionConfiguration",
+      "s3:AbortMultipartUpload",
+      "s3:ListMultipartUploadParts",
+      "s3:ListBucket",
+      "s3:ListBucketMultipartUploads",
     ]
 
     resources = ["${aws_s3_bucket.this.arn}"]
