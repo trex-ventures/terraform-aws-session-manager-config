@@ -10,7 +10,7 @@ resource "aws_s3_bucket" "this" {
   }
 
   logging = {
-    target_bucket = "${var.s3_logging_bucket}"
+    target_bucket = "${local.s3_logging_bucket}"
     target_prefix = "${local.s3_bucket_name}/"
   }
 

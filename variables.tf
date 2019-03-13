@@ -29,11 +29,6 @@ variable "ssm_document_description" {
   type        = "string"
 }
 
-variable "s3_logging_bucket" {
-  description = "logging bucket used to log activity of this bucket"
-  type        = "string"
-}
-
 variable "s3_enable_versioning" {
   description = "Enable versioning for this bucket"
   default     = "True"
