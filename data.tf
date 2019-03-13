@@ -50,7 +50,7 @@ data "aws_iam_policy_document" "session_manager" {
   }
 
   statement = {
-    sid    = "AllowEC2InstancesToGetBucketEcnryption"
+    sid    = "AllowEC2InstancesToGetBucketEncryption"
     effect = "Allow"
 
     actions = [

@@ -16,6 +16,7 @@ variable "environment" {
 variable "s3_bucket_description" {
   description = "description for this bucket."
   type        = "string"
+  default     = "s3 bucket to store SSM session manager logs"
 }
 
 variable "session_manager_document_name" {
@@ -27,6 +28,7 @@ variable "session_manager_document_name" {
 variable "ssm_document_description" {
   description = "description for ssm document"
   type        = "string"
+  default     = "document to hold regional session manager preferences"
 }
 
 variable "s3_enable_versioning" {
