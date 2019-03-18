@@ -10,7 +10,7 @@ output "iam_policy_name" {
 
 output "iam_policy_arn" {
   value       = "${aws_iam_policy.this.arn}"
-  description = "the name of iam policy for allowing session manager access"
+  description = "the arn of iam policy for allowing session manager access"
 }
 
 output "ssm_document_name" {
