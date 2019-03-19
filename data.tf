@@ -77,7 +77,10 @@ data "aws_iam_policy_document" "session_manager" {
       "s3:ListBucketMultipartUploads",
     ]
 
-    resources = ["${aws_s3_bucket.this.arn}"]
+    resources = [
+      "${aws_s3_bucket.this.arn}",
+      "${aws_s3_bucket.this.arn}/*",
+    ]
   }
 }
 
