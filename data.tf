@@ -9,7 +9,7 @@ data "aws_iam_role" "super_admin" {
 data "aws_iam_policy_document" "session_manager" {
   # This policy is mostly copied from arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM version 8
   # Some statements were removed and specific S3 bucket added to reduce privilege
-  statement = {
+  statement {
     sid    = "AllowSSMActions"
     effect = "Allow"
 
@@ -49,7 +49,7 @@ data "aws_iam_policy_document" "session_manager" {
     resources = ["*"]
   }
 
-  statement = {
+  statement {
     sid    = "AllowSSMMessages"
     effect = "Allow"
 
@@ -63,21 +63,21 @@ data "aws_iam_policy_document" "session_manager" {
     resources = ["*"]
   }
 
-  statement = {
+  statement {
     sid       = "AllowCloudWatchPutMetrics"
     effect    = "Allow"
     actions   = ["cloudwatch:PutMetricData"]
     resources = ["*"]
   }
 
-  statement = {
+  statement {
     sid       = "AllowEC2DescribeInstanceStatus"
     effect    = "Allow"
     actions   = ["ec2:DescribeInstanceStatus"]
     resources = ["*"]
   }
 
-  statement = {
+  statement {
     sid    = "AllowS3Logging"
     effect = "Allow"
 
@@ -99,11 +99,11 @@ data "aws_iam_policy_document" "session_manager" {
 }
 
 data "aws_iam_policy_document" "s3_bucket" {
-  statement = {
+  statement {
     sid    = "DenyDeleteExceptFromSuperAdmin"
     effect = "Deny"
 
-    principals = {
+    principals {
       type        = "*"
       identifiers = ["*"]
     }
@@ -119,7 +119,7 @@ data "aws_iam_policy_document" "s3_bucket" {
       "arn:aws:s3:::${local.s3_bucket_name}",
     ]
 
-    condition = {
+    condition {
       test     = "StringNotLike"
       variable = "aws:userId"
 
