@@ -3,3 +3,4 @@ module "session_manager_config" {
   product_domain = "tsi"
   environment    = "staging"
 }
+
