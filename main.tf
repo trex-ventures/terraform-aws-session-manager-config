@@ -7,6 +7,7 @@ resource "aws_s3_bucket" "this" {
     ProductDomain = var.product_domain
     Environment   = var.environment
     Description   = var.s3_bucket_description
+    ManagedBy     = "terraform"
   }
 
   logging {

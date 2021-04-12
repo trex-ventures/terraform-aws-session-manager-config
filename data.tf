@@ -92,7 +92,7 @@ data "aws_iam_policy_document" "session_manager" {
     ]
 
     resources = [
-      "${aws_s3_bucket.this.arn}",
+      aws_s3_bucket.this.arn,
       "${aws_s3_bucket.this.arn}/*",
     ]
   }
