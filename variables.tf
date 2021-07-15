@@ -3,7 +3,7 @@ variable "s3_bucket_prefix" {
   description = "(Optional) To write output to a sub-dir, enter a sub-dir name."
 }
 
-variable "product_domain" {
+variable "product" {
   description = "product domain who owns this SSM Session Manager Configuration"
   type        = string
 }
@@ -41,4 +41,12 @@ variable "s3_sse_algorithm" {
   description = "Encryption algorithm used for this bucket"
   default     = "AES256"
   type        = string
+}
+
+variable "admin_role_names" {
+  description = "List of Administrator role names"
+  type        = list(string)
+  default = [
+    "SuperAdmin",
+  ]
 }

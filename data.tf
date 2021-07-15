@@ -2,8 +2,9 @@ data "aws_caller_identity" "current" {}
 
 data "aws_region" "current" {}
 
-data "aws_iam_role" "super_admin" {
-  name = "SuperAdmin"
+data "aws_iam_role" "admin" {
+  count = length(var.admin_role_names)
+  name  = element(var.admin_role_names, count.index)
 }
 
 data "aws_iam_policy_document" "session_manager" {
@@ -123,9 +124,7 @@ data "aws_iam_policy_document" "s3_bucket" {
       test     = "StringNotLike"
       variable = "aws:userId"
 
-      values = [
-        "${data.aws_iam_role.super_admin.id}:*", #SuperAdminRoleId
-      ]
+      values = data.aws_iam_role.admin.*.unique_id
     }
   }
 }

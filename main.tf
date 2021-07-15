@@ -3,11 +3,11 @@ resource "aws_s3_bucket" "this" {
   bucket = local.s3_bucket_name
 
   tags = {
-    Name          = local.s3_bucket_name
-    ProductDomain = var.product_domain
-    Environment   = var.environment
-    Description   = var.s3_bucket_description
-    ManagedBy     = "terraform"
+    Name        = local.s3_bucket_name
+    Product     = var.product
+    Environment = var.environment
+    Description = var.s3_bucket_description
+    ManagedBy   = "terraform"
   }
 
   logging {
@@ -48,11 +48,11 @@ resource "aws_ssm_document" "this" {
   document_format = "JSON"
 
   tags = {
-    Name          = local.ssm_document_name
-    ProductDomain = var.product_domain
-    Description   = var.ssm_document_description
-    Environment   = var.environment
-    ManagedBy     = "terraform"
+    Name        = local.ssm_document_name
+    Product     = var.product
+    Description = var.ssm_document_description
+    Environment = var.environment
+    ManagedBy   = "terraform"
   }
 
   content = <<DOC
